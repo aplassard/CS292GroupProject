@@ -1,0 +1,52 @@
+<template name="viewProfile">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10">
+        <div class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object img-thumbnail" src="http://placehold.it/140x140">
+          </a>
+          <div class="media-heading">
+            <h1>{{profile.name}}</h1>
+            <h4>{{profile.title}} at {{profile.company}}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="pull-right">
+          <a type="button" class="btn btn-primary" href="{{pathFor 'editProfile'}}"><span class="glyphicon glyphicon-pencil"></span> Edit Profile</a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      {{> listProjects}}
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h5 class="panel-title">Skills</h5>
+          </div>
+          <div class="panel-body">
+            {{#each profile.skills}}
+              <p>{{this}}</p>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h5 class="panel-title">Skills</h5>
+          </div>
+          <div class="panel-body">
+            {{#each profile.interests}}
+              <p>{{this}}</p>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+

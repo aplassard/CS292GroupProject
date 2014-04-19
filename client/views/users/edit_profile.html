@@ -1,28 +1,110 @@
 <template name="editProfile">
-<div class="container">
-  <form role="form">
-    <div class="form-group">
-      <label for="nameInput">Name</label>
-      <input class="form-control" type="text" id="nameInput" value="{{profile.name}}">
-    </div>
-    <div class="form-group">
-      <label for="skills">Skills:</label>
-      <div id="skills">
-        {{#each profile.skills}} 
-        <input class="form-control" type="text" value="{{this}}">
-        {{/each}}
-        <button class="btn btn-sm" id="addSkills"><span class="glyphicon glyphicon-plus"></span></button>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10">
+        <div class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object img-thumbnail" src="http://placehold.it/140x140">
+          </a>
+          <div class="media-heading">
+            <h1>{{profile.name}} 
+              <a type="button" value="name" class="btn btn-default btn-xs" data-toggle="modal" data-target="#nameModal"><span class="glyphicon
+                glyphicon-pencil"></span></a>
+            </h1>
+            <h4>{{profile.title}} at {{profile.company}}</h4>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="nameModal" tabindex="-1" role="dialog" aria-labelledby="nameModalLabel"
+        area-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="nameModalLabel">Edit Name, Company and Title</h4>
+            </div>
+            <div class="modal-body">
+              <form role="form">
+                <div class="form-group">
+                  <label for="nameInput">Name:</label>
+                  <input type="text" class="form-control" id="nameInput" placeholder="Enter Name"
+                  value="{{profile.name}}">
+                </div>
+                <div class="form-group">
+                  <label for="companyInput">Company:</label>
+                  <input type="text" id="companyInput" class="form-control" placeholder="Enter Company"
+                  value="{{profile.company}}">
+                </div>
+                <div class="form-group">
+                  <label for="titleInput">Title:</label>
+                  <input type="text" class="form-control" id="titleInput" value="{{profile.title}}">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="saveNameEdit">Save Changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-2">
+        <div class="pull-right">
+          <a type="button" class="btn btn-primary" href="{{pathFor 'viewProfile'}}"><span class="glyphicon
+              glyphicon-ok"></span> Done</a>
+        </div>
       </div>
     </div>
-    <div class="form-group">
-      <label for="interests">Interests:</label>
-      <div id="interests">
-        {{#each profile.interests}}
-          <input class="form-control" type="text" value="{{this}}">
-        {{/each}}
-        <button class="btn btn-sm" id="addInterest"><span class="glyphicon glyphicon-plus"></span></button>
+    <div class="row">
+      {{> listProjects}}
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h5 class="panel-title">Skills</h5>
+          </div>
+          <div class="panel-body">
+            {{#each profile.skills}}
+              <p>{{this}}  <a type="button" class="btn btn-danger btn-xs pull-right"><span class="glyphicon
+                glyphicon-remove"></span></a></p>
+            {{/each}}
+            <form role="form">
+              <div class="form-group">
+                <label for="addInterest">Add Skills, Press Save to add</label>
+                <input type="text" class="form-control" id="addInterest">
+              </div>
+              <a type="button" class="btn btn-primary pull-right" id="saveSkill"><span class="glyphicon
+                  glyphicon-floppy-disk"></span>
+                  Save</a>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h5 class="panel-title">Interests</h5>
+          </div>
+          <div class="panel-body">
+            {{#each profile.interests}}
+            <p>{{this}}<a type="button" class="btn btn-danger btn-xs pull-right"><span class="glyphicon
+                glyphicon-remove"></span></a></p>
+            {{/each}}
+            <form role="form">
+              <div class="form-group">
+                <label for="addInterest">Add Interest, Press Save to add</label>
+                <input type="text" class="form-control" id="addInterest">
+              </div>
+              <a type="button" class="btn btn-primary pull-right" id="saveInterest"><span class="glyphicon
+                  glyphicon-floppy-disk"></span>
+                  Save</a>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
-  </form>
-</div>
+  </div>
 </template>

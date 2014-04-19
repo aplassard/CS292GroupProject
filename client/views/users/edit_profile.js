@@ -1,10 +1,5 @@
 Template.editProfile.events({
-  'click #addInterest': function(event) {
-    console.log(this.profile.interests);
-  },
-  
-  'click #addSkills': function(event) {
-    console.log(this.profile.skills);
-    this.profile.skills.push("");
+  'click a': function(event) {
+    console.log($(event.currentTarget).attr('value'));
   }
 });

@@ -1,4 +1,5 @@
 <template name="viewProfile">
+{{#if currentUser}}
   <div class="container">
     <div class="row">
       <div class="col-lg-10">
@@ -17,9 +18,11 @@
         </div>
       </div>
       <div class="col-lg-2">
+        {{#if isMe}}
         <div class="pull-right">
           <a type="button" class="btn btn-primary" href="{{pathFor 'editProfile'}}"><span class="glyphicon glyphicon-pencil"></span> Edit Profile</a>
         </div>
+        {{/if}}
       </div>
     </div>
     <div class="row">
@@ -55,5 +58,8 @@
       {{> listContacts}}
     </div>
   </div>
+{{else}}
+  {{> pleaseLogIn}}
+{{/if}}
 </template>
 

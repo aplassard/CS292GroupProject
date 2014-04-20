@@ -1,0 +1,17 @@
+<template name="searchUserForm">
+  <form role="form">
+    <div class="form-group">
+      <label for="searchContent">Search for Users:</label>
+      <input type="text" class="form-control" id="searchContent" placeholder="Enter Search">
+    </div>
+    <div class="form-group">
+      <label for="searchType">Type of Search</label>
+      <select class="form-control">
+        <option value="name">Name and Username</option>
+        <option value="skills">Skill</option>
+        <option value="interests">Interest</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+</template>

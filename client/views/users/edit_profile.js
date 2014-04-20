@@ -18,13 +18,13 @@ Template.editProfile.events({
     Meteor.users.update(Meteor.userId(), {$set: {'profile.name': name, 'profile.company': company, 'profile.title': title, 'profile.completed': true}});
   },
 
-  'click #saveSkill': function(event) {
+  'submit #saveSkill': function(event) {
     var newSkill = $('#addSkill').val();
     $('#addSkill').val("");
     Meteor.users.update(Meteor.userId(), {$push: {'profile.skills': newSkill}});
   },
 
-  'click #saveInterest': function(event) {
+  'submit #saveInterest': function(event) {
     var newSkill = $('#addInterest').val();
     $('#addInterest').val("");
     Meteor.users.update(Meteor.userId(), {$push: {'profile.interests': newSkill}});
@@ -42,5 +42,9 @@ Template.editProfile.events({
 
   'change #attachment': function(event) {
     Meteor.users.update(Meteor.userId(), {$set: {'profile.picture': $(event.currentTarget).val()}});
+  },
+  
+  'click #attachment': function(event) {
+    filepicker.constructWidget(document.getElementById('attachment'));
   }
 });

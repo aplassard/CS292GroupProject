@@ -1,0 +1,14 @@
+<template name="searchUsers">
+{{#if currentUser}}
+  <h1>Users</h1>
+  <div class="list-group">
+  {{#each userList}}
+    {{#if notMe}}
+      <a class="list-group-item" href="{{pathFor 'viewProfile'}}">{{profile.name}}</a>
+    {{/if}}
+  {{/each}}
+  </div>
+{{else}}
+  {{> pleaseLogIn}}
+{{/if}}
+</template>

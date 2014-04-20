@@ -4,7 +4,11 @@
       <div class="col-lg-10">
         <div class="media">
           <a class="pull-left" href="#">
-            <img class="media-object img-thumbnail" src="http://placehold.it/140x140">
+          {{#if hasPicture}}
+            <img class="media-object img-thumbnail" id="prof-pic" src="{{profile.picture}}" style="max-width: 300px; max-height: 140px" alt="Picture Not Available">
+          {{else}}
+            <img class="media-object img-thumbnail" id="prof-pic" src="http://placehold.it/140x140" alt="Image Placeholder">
+          {{/if}}
           </a>
           <div class="media-heading">
             <h1>{{profile.name}}</h1>
@@ -46,6 +50,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="row">
+      {{> listContacts}}
     </div>
   </div>
 </template>

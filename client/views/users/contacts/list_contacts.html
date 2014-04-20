@@ -1,0 +1,10 @@
+<template name="listContacts">
+{{#if hasContacts}}
+  <h1>Contacts</h1>
+  <div class="list-group">
+    {{#each contacts}}
+    <a href="#" class="list-group-item">{{profile.name}}</a>
+    {{/each}}
+  </div>
+{{/if}}
+</template>

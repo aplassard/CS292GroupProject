@@ -4,7 +4,13 @@
       <div class="col-lg-10">
         <div class="media">
           <a class="pull-left" href="#">
-            <img class="media-object img-thumbnail" src="http://placehold.it/140x140">
+            {{#if hasPicture}}
+              <img class="media-object img-thumbnail" id="prof-pic" src="{{profile.picture}}" style="max-width: 300px;
+              max-height: 140px" alt="Picture Not Available">
+            {{else}}
+              <img class="media-object img-thumbnail" id="prof-pic" src="http://placehold.it/140x140" alt="Image Placeholder">
+            {{/if}}
+            <input type="filepicker" id="attachment">
           </a>
           <div class="media-heading">
             <h1>{{profile.name}} 
@@ -44,7 +50,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" id="saveNameEdit">Save Changes</button>
+              <button type="button" class="btn btn-primary" id="saveNameEdit" data-dismiss="modal">Save Changes</button>
             </div>
           </div>
         </div>
@@ -68,13 +74,13 @@
           </div>
           <div class="panel-body">
             {{#each profile.skills}}
-              <p>{{this}}  <a type="button" class="btn btn-danger btn-xs pull-right"><span class="glyphicon
+              <p>{{this}}  <a type="button" class="btn btn-danger btn-xs pull-right remove-skill"><span class="glyphicon
                 glyphicon-remove"></span></a></p>
             {{/each}}
             <form role="form">
               <div class="form-group">
                 <label for="addInterest">Add Skills, Press Save to add</label>
-                <input type="text" class="form-control" id="addInterest">
+                <input type="text" class="form-control" id="addSkill">
               </div>
               <a type="button" class="btn btn-primary pull-right" id="saveSkill"><span class="glyphicon
                   glyphicon-floppy-disk"></span>
@@ -90,7 +96,7 @@
           </div>
           <div class="panel-body">
             {{#each profile.interests}}
-            <p>{{this}}<a type="button" class="btn btn-danger btn-xs pull-right"><span class="glyphicon
+            <p>{{this}}<a type="button" class="btn btn-danger btn-xs pull-right remove-interest"><span class="glyphicon
                 glyphicon-remove"></span></a></p>
             {{/each}}
             <form role="form">

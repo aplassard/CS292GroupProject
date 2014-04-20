@@ -1,5 +1,29 @@
 <template name="home_default">
   {{#if currentUser}}
+    {{#if profileNotComplete}}
+      <div class="alert alert-warning">
+        <p>Your profile is not complete. Click <a href="{{pathFor 'editProfile'}}">here</a> to edit</p>
+      </div>
+    {{/if}}
+    <div class="row">
+      <div class="col-md-4">
+        <form role="form">
+          <div class="form-group">
+            <label for="searchUsers">Search Users:</label>
+            <input type="text" class="form-control" placeholder="Name or Username">
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        {{> listProjects}}
+      </div>
+      <div class="col-md-6">
+        {{> listContacts}}
+      </div>
+    </div>
+
   {{else}}
   <div class="container">
     <div class="row">

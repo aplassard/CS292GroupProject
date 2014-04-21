@@ -19,9 +19,24 @@
       </div>
       <div class="col-lg-2">
         {{#if isMe}}
-        <div class="pull-right">
-          <a type="button" class="btn btn-primary" href="{{pathFor 'editProfile'}}"><span class="glyphicon glyphicon-pencil"></span> Edit Profile</a>
-        </div>
+          <div class="pull-right">
+            <a type="button" class="btn btn-primary" href="{{pathFor 'editProfile'}}"><span class="glyphicon glyphicon-pencil"></span> Edit Profile</a>
+          </div>
+        {{else}}
+          <div class="pull-right">
+            {{#if notContact}}
+              {{#if notPending}}
+                <a type="button" class="btn btn-primary" href="#" id="addContact"><span class="glyphicon glyphicon-plus"></span> Add
+                  Contact</a>
+              {{else}}
+                <a type="button" class="btn btn-success" href="#"><span class="glyphicon glyphicon-ok"></span> Sent
+                  Request</a>
+              {{/if}}
+            {{else}}
+              <a type="button" class="btn btn-primary" href="#" id="removeContact"><span class="glyphicon glyphicon-minus"></span> Remove
+                Contact</a>
+            {{/if}}
+          </div>
         {{/if}}
       </div>
     </div>

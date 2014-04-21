@@ -7,19 +7,27 @@ Meteor.publish('allUserData', function(ids) {
 });
 
 Meteor.publish('listUsers', function(searchTerm, searchWhat) {
-  var searchObject = {}
-  switch (searchWhat) {
-    case 'name':
-      if (searchTerm) {
-        var regex = new RegExp("\w*" + searchTerm + "\w*", 'i');
-        searchObject = {$or: [{username: regex}, {'profile.name': regex}]};
-      }
-      break;
-    default:
-      if (searchTerm) {
-        // searchWhat should contain 'profile.skills or profile.interest'
-        searchObject = {searchWhat: searchTerm}
-      }
+  if (this.userId) {
+    var searchObject = {}
+    switch (searchWhat) {
+      case 'name':
+        if (searchTerm) {
+          var regex = new RegExp("\w*" + searchTerm + "\w*", 'i');
+          searchObject = {$or: [{username: regex}, {'profile.name': regex}]};
+        }
+        break;
+      default:
+        if (searchTerm) {
+          // searchWhat should contain 'profile.skills or profile.interest'
+          searchObject = {searchWhat: searchTerm}
+        }
+    }
+    return Meteor.users.find({}, {fields: {_id: 1, 'profile.name': 1, 'profile.picture': 1}});
+  } else {
+    return;
   }
-  return Meteor.users.find({}, {fields: {_id: 1, 'profile.name': 1, 'profile.picture': 1}});
+});
+
+Meteor.publish('notifications', function() {
+  return Notifications.find({to: this.userId});
 });

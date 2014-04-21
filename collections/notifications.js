@@ -3,6 +3,9 @@ Notifications = new Meteor.Collection("notifications");
 Notifications.allow({
   insert: function(userId, doc) {
             return (userId && doc.from === userId)
+          },
+  remove: function(userId, doc) {
+            return (userId && (doc.from === userId || doc.to === userId));
           }
 });
 
@@ -15,6 +18,10 @@ var areContacts = function(contacts, id) {
 }
 
 Meteor.methods({
+  'viewRequests': function() {
+    Notifications.update({to: this.userId}, {$set: {viewed: true}});
+  },
+
   'removeContact': function(otherId, myId) {
     if (!this.isSimulation) {
       console.log("my " + myId + " other " + otherId);

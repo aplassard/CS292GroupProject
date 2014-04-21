@@ -1,0 +1,26 @@
+<template name="requests">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    Notifications
+    {{#if requestCount}}
+      <span class="badge badge-inverse">{{requestCount}}</span>
+    {{/if}}
+    <b class="caret"></b>
+  </a>
+  <ul class="request dropdown-menu">
+    {{#if hasRequests}}
+      {{#each getRequests}}
+        {{> request}}
+      {{/each}}
+    {{else}}
+      <li><a href="#">No Notifications</a></li>
+    {{/if}}
+  </ul>
+</template>
+
+<template name="request">
+  <li>
+    <a class="confirm-request" href="#">
+      <strong>{{fromName}}</strong> {{getMessage}}
+    </a>
+  </li>
+</template>

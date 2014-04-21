@@ -32,7 +32,14 @@ Template.viewProfile.notPending = function() {
 
 Template.viewProfile.events({
   'click #addContact': function(event) {
-    Notifications.insert({to: this._id, from: Meteor.userId(), type: 'contactRequest', date: new Date()});
+    Notifications.insert({
+      to: this._id, 
+      from: Meteor.userId(), 
+      fromName: Meteor.user().profile.name, 
+      type: 'contactRequest', 
+      date: new Date(), 
+      viewed: false
+    });
     Meteor.users.update(Meteor.userId(), {$push: {'profile.pendingContacts': this._id}});
   },
 

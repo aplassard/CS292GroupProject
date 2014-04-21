@@ -2,8 +2,8 @@
 {{#if hasContacts}}
   <h1>Contacts</h1>
   <div class="list-group">
-    {{#each contacts}}
-    <a href="#" class="list-group-item">{{profile.name}}</a>
+    {{#each profile.contacts}}
+      <a href="#" class="list-group-item">{{name}}</a>
     {{/each}}
   </div>
 {{/if}}

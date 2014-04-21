@@ -8,13 +8,17 @@
     </div>
     <div class="col-md-8">
       <h1>Search for <em>{{searchTerm}}</em> in <em>{{searching}}</em></h1>
-      <div class="list-group">
-      {{#each userList}}
-        {{#if notMe}}
-          <a class="list-group-item" href="{{pathFor 'viewProfile'}}">{{profile.name}}</a>
-        {{/if}}
-      {{/each}}
-      </div>
+      {{#if hasResults}}
+        <div class="list-group">
+        {{#each userList}}
+          {{#if notMe}}
+            <a class="list-group-item" href="{{pathFor 'viewProfile'}}">{{profile.name}}</a>
+          {{/if}}
+        {{/each}}
+        </div>
+      {{else}}
+        <p>No users match your search.</p>
+      {{/if}}
     </div>
   </div>
 </div>

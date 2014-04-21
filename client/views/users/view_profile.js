@@ -7,7 +7,6 @@ Template.viewProfile.isMe = function() {
 }
 
 var checkNotContact = function(contacts, id) {
-  console.log(JSON.stringify(contacts) + " id " + id);
   return contacts.every(function(element) {
     if (element._id === id) {
       return false;

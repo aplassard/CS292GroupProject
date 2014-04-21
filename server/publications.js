@@ -9,20 +9,23 @@ Meteor.publish('allUserData', function(ids) {
 Meteor.publish('listUsers', function(searchTerm, searchWhat) {
   if (this.userId) {
     var searchObject = {}
-    switch (searchWhat) {
-      case 'name':
-        if (searchTerm) {
-          var regex = new RegExp("\w*" + searchTerm + "\w*", 'i');
-          searchObject = {$or: [{username: regex}, {'profile.name': regex}]};
+    if (searchWhat === "name") {
+      if (searchTerm) {
+        var regex = new RegExp("\w*" + searchTerm + "\w*", 'i');
+        searchObject = {$or: [{username: regex}, {'profile.name': regex}]};
+      }
+    } else {
+      if (searchTerm) {
+        if (searchWhat === 'skills') {
+          var regex = new RegExp(searchTerm, 'i');
+          searchObject = {'profile.skills': regex};
+        } else {
+          searchObject = {'profile.interests': regex};
         }
-        break;
-      default:
-        if (searchTerm) {
-          // searchWhat should contain 'profile.skills or profile.interest'
-          searchObject = {searchWhat: searchTerm}
-        }
+      }
     }
-    return Meteor.users.find({}, {fields: {_id: 1, 'profile.name': 1, 'profile.picture': 1}});
+    console.log(searchObject);
+    return Meteor.users.find(searchObject, {fields: {_id: 1, 'profile.name': 1, 'profile.picture': 1}});
   } else {
     return;
   }

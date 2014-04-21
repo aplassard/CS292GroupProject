@@ -1,13 +1,23 @@
 <template name="searchUsers">
 {{#if currentUser}}
-  <h1>Users</h1>
-  <div class="list-group">
-  {{#each userList}}
-    {{#if notMe}}
-      <a class="list-group-item" href="{{pathFor 'viewProfile'}}">{{profile.name}}</a>
-    {{/if}}
-  {{/each}}
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 well">
+      <h1>Search Again</h1>
+      {{> searchUserForm}}
+    </div>
+    <div class="col-md-8">
+      <h1>Search for <em>{{searchTerm}}</em> in <em>{{searching}}</em></h1>
+      <div class="list-group">
+      {{#each userList}}
+        {{#if notMe}}
+          <a class="list-group-item" href="{{pathFor 'viewProfile'}}">{{profile.name}}</a>
+        {{/if}}
+      {{/each}}
+      </div>
+    </div>
   </div>
+</div>
 {{else}}
   {{> pleaseLogIn}}
 {{/if}}

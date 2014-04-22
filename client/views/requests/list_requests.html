@@ -1,0 +1,16 @@
+<template name="requestList">
+{{#if hasRequests}}
+  {{#each requests}}
+  <p><strong>{{fromName}}</strong> sent you a request 
+    <span class="btn-group pull-right">
+      <a type="button" class="btn btn-success btn-xs"
+        id="acceptRequest"><span class="glyphicon glyphicon-ok"></span> Accept</a>
+      <a type="button" class="btn btn-danger btn-xs" id="rejectRequest"><span class="glyphicon
+          glyphicon-remove"></span> Decline</a>
+    </span>
+  </p>
+  {{/each}}
+{{else}}
+  <p>No Outstanding Notifications</p>
+{{/if}}
+</template>

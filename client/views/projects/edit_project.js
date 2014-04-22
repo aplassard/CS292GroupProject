@@ -54,6 +54,7 @@ Template.editProject.events({
 
   'submit form': function(event) {
     var name = $('#nameInput').val();
+
     var description = $('#descriptionInput').val();
     $('.user-list').each(function(i) {
       if ($(this).hasClass('list-group-item-success')) {
@@ -65,6 +66,7 @@ Template.editProject.events({
           from: Meteor.userId(), 
           fromName: Meteor.user().profile.name, 
           projectName: name, 
+          projectId: Session.get("projectId"),
           type: 'projectInvite'
         });
       }

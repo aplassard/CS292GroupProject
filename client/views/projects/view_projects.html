@@ -21,11 +21,14 @@
         </div>
       </div>
       <div class="row">
+        {{#if hasMembers}}
+        <h2>Contributers: </h2>
         <div class="list-group">
           {{#each members}}
           <a class="list-group-item" href="{{pathFor 'viewProfile'}}">{{name}}</a>
           {{/each}}
         </div>
+        {{/if}}
       </div>
     </div>
     {{#if hasKeywords}}

@@ -65,5 +65,22 @@ Meteor.methods({
         throw new Meteor.error(500, "Update Failed", "Could not add contact")
       }
     }
+  },
+
+  'acceptProject': function(requestId) {
+    if (!this.isSimulation) {
+      var request = Notifications.findOne(requestId);
+      if (request && request.to === this.userId) {
+        me = Meteor.users.findOne(request.to);
+        him = Meteor.users.findOne(request.from);
+        if (me && him) {
+          Meteor.users.update(me._id, {$push: {'profile.collaborations': request.projectId}});
+          Projects.update(request.projectId, {$push: {members: {_id: me._id, name: me.profile.name}}});
+          Notifications.remove(request._id);
+        } else {
+          throw new Meteor.Error(500, "Update failed", "User not found");
+        }
+      }
+    }
   }
 });

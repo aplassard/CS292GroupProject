@@ -29,6 +29,10 @@ var notCreator = function(array, id) {
   });
 }
 
+Template.viewProject.hasMembers = function() {
+  return this.members && this.members.length > 0;
+}
+
 Template.viewProject.isOwner = function() {
-	return Meteor.userId() && this.creators && !notCreator(this.creators, Meteor.userId());
+	return Meteor.userId() && this.owners && !notCreator(this.owners, Meteor.userId());
 }

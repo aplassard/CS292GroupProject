@@ -1,14 +1,25 @@
 <template name="requestList">
 {{#if hasRequests}}
   {{#each requests}}
+  {{#if isContact}}
   <p><strong>{{fromName}}</strong> sent you a request 
     <span class="btn-group pull-right">
       <a type="button" class="btn btn-success btn-xs"
-        id="acceptRequest"><span class="glyphicon glyphicon-ok"></span> Accept</a>
-      <a type="button" class="btn btn-danger btn-xs" id="rejectRequest"><span class="glyphicon
+        id="acceptRequest-contact"><span class="glyphicon glyphicon-ok"></span> Accept</a>
+      <a type="button" class="btn btn-danger btn-xs reject-request"><span class="glyphicon
           glyphicon-remove"></span> Decline</a>
     </span>
   </p>
+  {{else}}
+  <p><strong>{{fromName}}</strong> requested to collaborate on {{projectName}} 
+    <span class="btn-group pull-right">
+      <a type="button" class="btn btn-success btn-xs"
+        id="acceptRequest-project"><span class="glyphicon glyphicon-ok"></span> Accept</a>
+      <a type="button" class="btn btn-danger btn-xs reject-request"><span class="glyphicon
+          glyphicon-remove"></span> Decline</a>
+    </span>
+  </p>   
+  {{/if}}
   {{/each}}
 {{else}}
   <p>No Outstanding Notifications</p>

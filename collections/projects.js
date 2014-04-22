@@ -2,18 +2,18 @@ Projects = new Meteor.Collection("projects");
 
 Projects.allow({
   insert: function(userId, doc) {
-            return (userId && doc.owners.length === 1 && doc.owners[0]._id === userId);
+            return (userId && doc.owners.length >= 1 && doc.owners[0]._id === userId);
           },
   update: function(userId, doc) {
             return (userId && !doc.owners.every(function(elem) {
-              if (userId === elem.ownerId) {
+              if (userId === elem) {
                 return false;
               }
             }));
           },
   remove: function(userId, doc) {
             return (userId && !doc.owners.every(function(elem) {
-              if (userId === elem.ownerId) {
+              if (userId === elemd) {
                 return false;
               }
             }));

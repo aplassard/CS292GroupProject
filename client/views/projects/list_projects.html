@@ -1,2 +1,10 @@
 <template name="listProjects">
+{{#if hasProjects}}
+  <h2>Projects</h2>
+  <div class="list-group">
+    {{#each projects}}
+      <a class="list-group-item project-link">{{getName}}</a>
+    {{/each}}
+  </div>
+{{/if}}
 </template>

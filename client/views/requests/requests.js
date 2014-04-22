@@ -13,6 +13,8 @@ Template.requests.hasRequests = function() {
 Template.request.getMessage = function() {
   if (this.type === "contactRequest") {
     return "sent a contact request. Click to confirm";
+  } else if(this.type === "projectInvite") {
+    return "invited you to collaborate on " + this.projectName;
   }
 }
 

@@ -25,8 +25,6 @@ Projects.allow({
     needs: array of skills the project is currently looking for
 */
 
-Projects = new Meteor.Collection("projects");
-
 
 var NonEmptyString = Match.Where(function (x) {
   check(x, String);

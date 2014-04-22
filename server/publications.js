@@ -39,3 +39,7 @@ Meteor.publish('listUsers', function(searchTerm, searchWhat) {
 Meteor.publish('notifications', function() {
   return Notifications.find({to: this.userId});
 });
+
+Meteor.publish('projects', function(id) {
+  return Projects.find(id);
+});

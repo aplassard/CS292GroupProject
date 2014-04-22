@@ -8,12 +8,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{{pathFor 'home_default'}}">Brand</a>
+          <a class="navbar-brand" href="{{pathFor 'home_default'}}">PMP</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
+              <li><a href="viewProjects">View All Projects</a></li>
             {{#if currentUser}}
-              <li><a href="#" id="myProfileLink">Profile</a></li>
+              <li><a href="#" id="myProfileLink">My Profile</a></li>
               <li><a href="#contact">My Projects</a></li>
               <li class="dropdown" id="request-dropdown">
                 {{> requests}}

@@ -6,6 +6,10 @@ Meteor.publish('allUserData', function(ids) {
   }
 });
 
+Meteor.publish('listProjects', function() {
+    return Projects.find({}, {fields: {_id: 1, name: 1, description: 1, owners: 1}});
+});
+
 // short 'n sweet: http://stackoverflow.com/questions/3446170
 function escapeRegExp(str) {
   return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");

@@ -8,9 +8,10 @@ Template.nav_bar.events({
   },
 
   'click #createNewProject': function(event) {
-    Projects.insert({name: "", creators: [Meteor.userId()], created: new Date()}, function(err, _id) {
-      console.log(_id);
-      Router.go("/projects/" + _id + '/edit');
-    });
+    if (Meteor.user()) {
+      Projects.insert({name: "", owners: [{_id: Meteor.userId(), name: Meteor.user().profile.name}], created: new Date()}, function(err, _id) {
+        Router.go("/projects/edit/" + _id);
+      });
+    }
   }
 });

@@ -1,15 +1,30 @@
 <template name="viewProject">
   <div class="container">
-    <div class="jumbotron">
+    <div>
       <div class="row">
         <div class="col-md-10">
           <h1>{{name}}</h1>
           <p>{{description}}</p>
         </div>
         <div class="col-md-2">
-          {{#if isCreator}}
+          {{#if isOwner}}
             <a href="{{pathFor 'editProject'}}" type='button' class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Edit Project</a>
           {{/if}}
+        </div>
+      </div>
+      <div class="row">
+        <h2>Owner</h2>
+        <div class="list-group">
+          {{#each owners}}
+            <a class="list-group-item" href="{{pathFor 'viewProfile'}}">{{name}}</a>
+          {{/each}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="list-group">
+          {{#each members}}
+          <a class="list-group-item" href="{{pathFor 'viewProfile'}}">{{name}}</a>
+          {{/each}}
         </div>
       </div>
     </div>

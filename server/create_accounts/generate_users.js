@@ -113,7 +113,7 @@ var randomProjectLoadDatabase = function()
         for(var j=0; j < numOwners; ++j)
         {
             var randomUser = Math.floor(Math.random()*users.length);
-            projectOwners.push(users[randomUser]._id);
+            projectOwners.push({_id: users[randomUser]._id, name: users[randomUser].profile.name});
         }
         
         var numMembers = Math.floor(Math.random()*10);

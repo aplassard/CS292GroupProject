@@ -47,8 +47,12 @@
           {{/each}}
         </ul>
       </div>
-      <button type="submit" class="btn btn-primary pull-right"><span class="glyphicon
-          glyphicon-floppy-disk"></span> Save Changes</button>
+      <div class="row">
+        <button type="submit" class="btn btn-primary pull-right"><span class="glyphicon
+            glyphicon-floppy-disk"></span> Save Changes</button>
+        <a type="button" href="#" class="btn btn-danger pull-right" id="delete-project">Delete Project</a>
+      </div>
+      <a type="button" href={{pathFor 'viewProject'}} class="btn btn-primary pull-right">Done Editing</a>
     </form>
   </div>
 </template>

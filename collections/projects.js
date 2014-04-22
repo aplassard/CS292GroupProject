@@ -2,11 +2,18 @@ Projects = new Meteor.Collection("projects");
 
 Projects.allow({
   insert: function(userId, doc) {
-            return (userId && doc.creators.length === 1 && doc.creators[0] === userId);
+            return (userId && doc.owners.length === 1 && doc.owners[0]._id === userId);
           },
   update: function(userId, doc) {
-            return (userId && !doc.creators.every(function(elem) {
-              if (userId === elem._id) {
+            return (userId && !doc.owners.every(function(elem) {
+              if (userId === elem.ownerId) {
+                return false;
+              }
+            }));
+          },
+  remove: function(userId, doc) {
+            return (userId && !doc.owners.every(function(elem) {
+              if (userId === elem.ownerId) {
                 return false;
               }
             }));
@@ -49,7 +56,7 @@ Meteor.methods({
       name: NonEmptyString,
       description: String,
       owners: NonEmptyArray,
-      members: Match.Optional([String]),
+      members: Match.Optional([Object]),
       keywords: NonEmptyArray,
       needs: Match.Optional(NonEmptyArray),
       _id: Match.Optional(NonEmptyString)

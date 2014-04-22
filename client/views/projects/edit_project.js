@@ -56,16 +56,18 @@ Template.editProject.events({
     var name = $('#nameInput').val();
     var description = $('#descriptionInput').val();
     $('.user-list').each(function(i) {
-      var userArr = $(this).attr('value').split('---');
-      var userObj = {name: userArr[1], _id: userArr[0]};
-      Projects.update(Session.get("projectId"), {$push: {pendingUsers: userObj}});
-      Notifications.insert({
-        to: userObj._id, 
-        from: Meteor.userId(), 
-        fromName: Meteor.user().profile.name, 
-        projectName: name, 
-        type: 'projectInvite'
-      });
+      if ($(this).hasClass('list-group-item-success')) {
+        var userArr = $(this).attr('value').split('---');
+        var userObj = {name: userArr[1], _id: userArr[0]};
+        Projects.update(Session.get("projectId"), {$push: {pendingUsers: userObj}});
+        Notifications.insert({
+          to: userObj._id, 
+          from: Meteor.userId(), 
+          fromName: Meteor.user().profile.name, 
+          projectName: name, 
+          type: 'projectInvite'
+        });
+      }
     });
     Projects.update(Session.get('projectId'), {$set: {
       name: name,
@@ -73,6 +75,14 @@ Template.editProject.events({
     }}, {}, function(affect) {
       console.log(affected);
     });
-    Router.go('/project/' + Session.get('projectId'));
+    var route = "/project/" + this._id;
+    console.log(route);
+    Router.go(route);
+  },
+
+  'click #delete-project': function() {
+    if (confirm("Delete Project?")) {
+      Projects.remove(this._id);
+    }
   }
 });

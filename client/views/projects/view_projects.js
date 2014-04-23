@@ -5,8 +5,7 @@ Template.viewProject.keywords = function() {
 }
 Template.viewProject.hasKeywords = function() {
   var proj =  Projects.findOne(this._id);
-  if (proj)
-    return proj.keywords.length > 0;
+  return proj && proj.keywords && proj.keywords.length > 0;
 }
 Template.viewProject.needs = function() {
   var proj = Projects.findOne(this._id);
@@ -15,8 +14,7 @@ Template.viewProject.needs = function() {
 }
 Template.viewProject.hasNeeds = function() {
   var proj = Projects.findOne(this._id);
-  if (proj)
-    return proj.needs.length > 0;
+  return proj && proj.needs && proj.needs.length > 0;
 }
 
 var notCreator = function(array, id) {
@@ -36,3 +34,9 @@ Template.viewProject.hasMembers = function() {
 Template.viewProject.isOwner = function() {
 	return Meteor.userId() && this.owners && !notCreator(this.owners, Meteor.userId());
 }
+
+Template.viewProject.events({
+  'click .profile-link': function(event) {
+    Router.go('/profile/' + this._id);
+  }
+});

@@ -1,4 +1,30 @@
+@link-color:       #428bca;
+@link-color-hover: darken(@link-color, 15%);
+
 body {
   margin-top: 70px
 }
 
+.project-row {
+ -moz-column-width: 20em;
+ -webkit-column-width: 20em;
+ -moz-column-gap: 1em;
+ -webkit-column-gap: 1em;
+}
+
+.project-panel {
+  display: inline-block;
+  width:  100%; 
+}
+
+.project-link {
+  color:       @link-color;
+  color-hover: @link-color-hover;
+  cursor: pointer;
+}
+
+.profile-link {
+  color:       @link-color;
+  color-hover: @link-color-hover;
+  cursor: pointer;
+}

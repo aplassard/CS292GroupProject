@@ -7,11 +7,11 @@ Meteor.publish('allUserData', function(ids) {
 });
 
 Meteor.publish('projectNames', function() {
-  return Projects.find({}, {fields: {_id: 1, name: 1}});
+  return Projects.find({}, {fields: {_id: 1, name: 1, nameLowerCase: 1}});
 });
 
-Meteor.publish('listProjects', function() {
-    return Projects.find({}, {fields: {_id: 1, name: 1, description: 1, owners: 1}});
+Meteor.publish('projectData', function() {
+    return Projects.find({}, {fields: {_id: 1, name: 1, nameLowerCase: 1, description: 1, owners: 1}});
 });
 
 // short 'n sweet: http://stackoverflow.com/questions/3446170

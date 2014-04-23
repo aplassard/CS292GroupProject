@@ -40,11 +40,26 @@
         {{/if}}
       </div>
     </div>
+    <br/>
     <div class="row">
-      {{> listProjects}}
+      <div class="col-md-8">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h5 class="panel-title">Projects</h5>
+          </div>
+          <div class="panel-body">
+            {{#each profile.ownedProjects}}
+              <p class="project-link"><b>{{name}} - Owner</b></p>
+            {{/each}}
+            {{#each profile.collaborations}}
+              <p class="project-link">{{name}} - Member</p>
+            {{/each}}
+          </div>
+        </div>
+      </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-8">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h5 class="panel-title">Skills</h5>
@@ -56,7 +71,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-8">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h5 class="panel-title">Interests</h5>

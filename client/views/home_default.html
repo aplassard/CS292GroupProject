@@ -1,3 +1,7 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
 <template name="home_default">
   <div class="container">
     <div class="row">
@@ -8,9 +12,9 @@
         {{#unless currentUser}}
         <p>Log in and create your profile to get started!</p>
         {{/unless}}
-        <p>
+        <!--<p>
           <a class="btn btn-primary btn-lg" role="button">Learn more</a>
-        </p>
+        </p>-->
       </div>
     </div>
   </div>
@@ -22,20 +26,10 @@
     </p>
   </div>
   {{/if}}
-    <div class="row">
-      <div class="col-md-4">
-        {{> searchUserForm}}
-      </div>
-    </div>
   <div class="row">
-    <div class="col-md-6">
-      {{> listProjects}}
-    </div>
-    <div class="col-md-6">
-      {{> listContacts}}
+    <div class="col-md-4">
+      {{> searchUserForm}}
     </div>
   </div>
-
-  {{else}}
   {{/if}}
 </template>

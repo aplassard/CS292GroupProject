@@ -45,5 +45,9 @@ Template.viewProfile.events({
 
   'click #removeContact': function(event) {
     Meteor.call('removeContact', this._id, Meteor.userId());
+  },
+  
+  'click .project-link': function(event) {
+    Router.go('/projects/' + this._id);
   }
 });

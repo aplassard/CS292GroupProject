@@ -73,10 +73,13 @@ Template.editProject.events({
     });
     Projects.update(Session.get('projectId'), {$set: {
       name: name,
+      created: new Date(),
+      nameLowerCase: name.toLowerCase(),
       description: description
     }}, {}, function(affect) {
-      console.log(affected);
+      console.log(affect);
     });
+    Meteor.users.update(Meteor.userId(), {$push: {'profile.ownedProjects': {'_id': this._id, 'name': "New Project"}}});
     var route = "/project/" + this._id;
     console.log(route);
     Router.go(route);
@@ -85,6 +88,15 @@ Template.editProject.events({
   'click #delete-project': function() {
     if (confirm("Delete Project?")) {
       Projects.remove(this._id);
+      Meteor.users.update(Meteor.userId(), {$pull: {'profile.ownedProjects': {'_id': this._id, 'name': "New Project"}}});
+      history.back();
     }
   }
 });
+
+Template.editProject.destroyed = function() {
+  var proj = Projects.findOne(Session.get('projectId'));
+  if (proj && proj.created == null) {
+    Projects.remove(this._id);
+  }
+}

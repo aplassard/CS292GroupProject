@@ -40,6 +40,17 @@ Template.editProfile.events({
     Meteor.users.update(Meteor.userId(), {$pull: {'profile.interests': item}});
   },
 
+  'click .leave-project': function(event) {
+    var item = this;
+    bootbox.confirm("Are you sure you want to leave the project?", function(result) {
+      if (result)
+      {
+        Meteor.users.update(Meteor.userId(), {$pull: {'profile.collaborations': item}});
+        Projects.update(item._id, {$pull: {'members': {'_id': Meteor.user()._id, 'name': Meteor.user().profile.name}}});
+      }
+    });
+  },
+
   'change #attachment': function(event) {
     Meteor.users.update(Meteor.userId(), {$set: {'profile.picture': $(event.currentTarget).val()}});
   },

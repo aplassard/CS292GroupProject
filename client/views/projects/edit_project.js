@@ -86,11 +86,14 @@ Template.editProject.events({
   },
 
   'click #delete-project': function() {
-    if (confirm("Delete Project?")) {
-      Projects.remove(this._id);
-      Meteor.users.update(Meteor.userId(), {$pull: {'profile.ownedProjects': {'_id': this._id, 'name': "New Project"}}});
-      history.back();
-    }
+    bootbox.confirm("Are you sure you want to delete the project?", function(result) {
+      if (result)
+      {
+        Projects.remove(this._id);
+        Meteor.users.update(Meteor.userId(), {$pull: {'profile.ownedProjects': {'_id': this._id, 'name': "New Project"}}});
+        history.back();
+      }
+    });
   }
 });
 

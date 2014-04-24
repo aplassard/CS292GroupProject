@@ -5,11 +5,11 @@
         <div class="panel-heading">
           <h2>All Projects</h2>
         </div>
-        <ul class="list-group">
+        <div class="list-group">
         {{#each projects}}
-          <li class="list-group-item project-link">{{name}} - {{description}}</li>
+          <a class="list-group-item project-link">{{name}} - {{description}}</a>
         {{/each}}
-        </ul>
+        </div>
       </div>
     </div>
   </div>

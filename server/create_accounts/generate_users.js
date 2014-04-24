@@ -176,6 +176,21 @@ var randomProjectLoadDatabase = function()
       collaborations.push(randomProject._id);
     }
   }
+  
+  // for each project, add every user in that project as a contact for every other user in that project
+  for(var i in projectBriefs)
+  {
+    var project = Projects.findOne(projectBriefs[i]._id, {fields: {"_id": 1, "owners": 1, "members": 1}});
+    var users = project.owners.concat(project.members);
+    for(var j in users)
+    {
+      for(var k in users)
+      {
+        if (j==k) continue;
+        Meteor.users.update(users[j]._id, {$addToSet: {"profile.contacts": {_id: users[k]._id, name: users[k].name}}});
+      }
+    }
+  }
 }
 
 Meteor.startup(function() {

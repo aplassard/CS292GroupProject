@@ -28,3 +28,9 @@ body {
   color-hover: @link-color-hover;
   cursor: pointer;
 }
+
+.contact-link {
+  color:       @link-color;
+  color-hover: @link-color-hover;
+  cursor: pointer;
+}

@@ -1,10 +1,16 @@
 <template name="listContacts">
 {{#if hasContacts}}
-  <h1>Contacts</h1>
-  <div class="list-group">
-    {{#each profile.contacts}}
-      <a href="#" class="list-group-item">{{name}}</a>
-    {{/each}}
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h5 class="panel-title">Contacts</h5>
+    </div>
+    <div class="panel-body">
+      <ul class="list-inline">
+        {{#each contacts}}
+          <li class="contact-link">{{name}}</li>
+        {{/each}}
+      </ul>
+    </div>
   </div>
 {{/if}}
 </template>

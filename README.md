@@ -1,25 +1,29 @@
-CS292GroupProject
+CS292 Group Project: The Project Management Project
 =================
 
-Our EC2 instance is configured. To run the app in the project directory run `meteor` and point your browser to the instance ip at port 3000. For the windows users it should be easier just to develop directly on the EC2 but download instructions are below. 
+Check out the project live at http://pmpit.meteor.com
 
-Download meteor 
+On *nix:
+Install Meteor
 `curl https://install.meteor.com/ | sh`
 Install Node
 Install Meteorite
 `npm install -g meteorite`
-
-To get the application running on your local computer 
-
 Clone/pull repository
 `sudo mrt install`
 
-Group Project for CS 292
+On Windows:
+Install Meteor
+`http://win-install.meteor.com/LaunchMeteor.exe`
+Extract windows-packages.7z in the packages directory.
+
 
 Authors:
 --------
-Andrew Plassard
+Andrew Bachman
+
+Matt Chambers
 
 Morgan Harrell
 
-Andrew Bachman
+Andrew Plassard

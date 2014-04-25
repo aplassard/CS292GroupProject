@@ -5,7 +5,7 @@ Notifications.allow({
             return (userId && doc.from === userId)
           },
   remove: function(userId, doc) {
-            return (userId && (doc.from === userId || doc.to === userId));
+            return (userId && (doc.from === userId || doc.to === userId || doc.projectId === userId));
           }
 });
 
@@ -74,8 +74,9 @@ Meteor.methods({
         me = Meteor.users.findOne(request.to);
         him = Meteor.users.findOne(request.from);
         if (me && him) {
-          Meteor.users.update(me._id, {$push: {'profile.collaborations': request.projectId}});
+          Meteor.users.update(me._id, {$push: {'profile.collaborations': {_id: request.projectId, name: Projects.findOne(request.projectId).name}}});
           Projects.update(request.projectId, {$push: {members: {_id: me._id, name: me.profile.name}}});
+          Projects.update(request.projectId, {$pull: {pendingUsers: {_id: me._id, name: me.profile.name}}});
           Notifications.remove(request._id);
         } else {
           throw new Meteor.Error(500, "Update failed", "User not found");

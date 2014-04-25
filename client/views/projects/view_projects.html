@@ -1,4 +1,7 @@
 <template name="viewProject">
+{{#if name}}
+{{#if currentUser}}
+{{setTitle "PMP - " name}}
   <div class="js-masonry container" data-masonry-options='{ "itemSelector": ".project-panel" }'>
     <div class="row">
       <div class="col-xs-12">
@@ -18,11 +21,12 @@
           </div>
           <div class="panel-body">
             <p>{{description}}</p>
+            <p>Created {{created}}</p>
           </div>
         </div>
         <div class="panel panel-default project-panel">
           <div class="panel-heading">
-            <h5 class="panel-title">Contributors</h5>
+            <h5 class="panel-title"><b>Owners</b> &amp; Members</h5>
           </div>
           <div class="panel-body">
             <ul class="list-inline">
@@ -60,4 +64,10 @@
       </div>
     </div>
   </div>
+{{else}}
+  {{> pleaseLogIn}}
+{{/if}}
+{{else}}
+  {{> error404}}
+{{/if}}
 </template>

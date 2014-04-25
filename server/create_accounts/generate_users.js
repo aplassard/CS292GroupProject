@@ -54,6 +54,7 @@ var randomNamesLoadDatabase = function()
       company: randomCompany,
       collaborations: [],
       ownedProjects: [],
+      contacts: [],
       completed: true
     };
 
@@ -152,6 +153,7 @@ var randomProjectLoadDatabase = function()
     {
       _id: projectId,
       name: projectName,
+      created: new Date(),
       description: projectDescription,
       owners: projectOwners,
       members: [],
@@ -162,7 +164,7 @@ var randomProjectLoadDatabase = function()
   for(var i in users)
   {
     var user = users[i];
-    var numCollaborations = Math.floor(Math.random()*10);
+    var numCollaborations = Math.ceil(Math.random()*4);
     var collaborations = [];
     for(var j=0; j < numCollaborations; ++j)
     {

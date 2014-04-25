@@ -1,8 +1,21 @@
+// allow users to update another user's collaborations field;
+// this is required by the edit project page when removing members;
+// but is there a better way to do this?
+Meteor.users.allow({
+  update: function(userId, doc, fields, modifier) {
+    //console.log("%s %j %j", userId, fields, modifier);
+    if (modifier && modifier["$pull"] && Object.keys(modifier["$pull"]).length == 1 && modifier["$pull"]["profile.collaborations"]) {
+      return true;
+    }
+    return false;
+  }
+});
+
 Meteor.publish('allUserData', function(ids) {
   if (this.userId) {
     return Meteor.users.find({_id: {$in: ids}}, {fields: {_id: 1, profile: 1, username: 1}});
   } else {
-    return
+    return Meteor.users.find({_id: {$in: ids}}, {fields: {_id: 1}});
   }
 });
 
@@ -40,12 +53,16 @@ Meteor.publish('listUsers', function(searchTerm, searchWhat) {
     console.log(searchObject);
     return Meteor.users.find(searchObject, {fields: {_id: 1, 'profile.name': 1, 'profile.picture': 1}});
   } else {
-    return;
+    return [];
   }
 });
 
 Meteor.publish('notifications', function() {
   return Notifications.find({to: this.userId});
+});
+
+Meteor.publish('projectInvites', function(id) {
+  return Notifications.find({projectId: id});
 });
 
 Meteor.publish('projects', function(id) {

@@ -56,6 +56,7 @@ Meteor.methods({
   createProject: function (options) {
     check(options, {
       name: NonEmptyString,
+      created: Match.Optional(Date),
       description: String,
       owners: NonEmptyArray,
       members: Match.Optional([Object]),
@@ -75,12 +76,27 @@ Meteor.methods({
       owners: options.owners,
       name: options.name,
       nameLowerCase: options.name.toLowerCase(),
+      created: options.created,
       description: options.description,
       members: options.members ? options.members : [],
       keywords: options.keywords,
       needs: options.needs ? options.needs : []
     });
     return id;
-  }
+  },
 
+  deleteProject: function (options) {
+    check(options, {_id: NonEmptyString});
+
+    var proj = Projects.findOne(options._id);
+    if (proj == null)
+      throw new Meteor.Error(413, "Project id does not exist");
+
+    for(var i in proj.owners)
+        Meteor.users.update(proj.owners[i]._id, {$pull: {'profile.ownedProjects': {'_id': proj._id}}});
+    for(var i in proj.members)
+        Meteor.users.update(proj.members[i]._id, {$pull: {'profile.collaborations': {'_id': proj._id}}});
+
+    Projects.remove(options._id);
+  }
 });

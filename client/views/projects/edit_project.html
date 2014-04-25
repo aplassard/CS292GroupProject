@@ -1,23 +1,36 @@
 <template name="editProject">
+{{#if name}}
+{{setTitle "PMP - Editing " name}}
   <div class="container">
     <form role="form">
-      <div class="form-group">
+      <div class="form-group col-md-4">
         <label for="nameInput">Project Name: </label>
         <input type="text" class="form-control" id="nameInput" value="{{name}}" placeholder="project">
       </div>
-      <div class="form-group">
+      <div class="form-group col-md-8">
         <label for="descriptionInput">Description: </label>
         <textarea id="descriptionInput" class="form-control" rows="4" placeholder="Enter a description of the project.">{{description}}</textarea>
       </div>
-      <div class="form-group">
-        <label for="userInput">Invite Collaborators: </label>
-        <div class="static-form-control list-group">
-          {{#each contacts}}
-          <a href="#" class="list-group-item user-list" value="{{_id}}---{{name}}">{{name}}</a>
+      <div class="form-group col-md-4">
+        <label for="userInput">Current and Pending Collaborators: </label>
+        <div class="list-group">
+          {{#each currentUsers}}
+          <p class="list-group-item current-user">{{name}} {{> removeRowButton user=this project=../name context="remove-current-user"}}</p>
+          {{/each}}
+          {{#each pendingUsers}}
+          <p class="list-group-item pending-user">{{name}} - Pending {{> removeRowButton user=this context="remove-pending-user"}}</p>
           {{/each}}
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group col-md-12">
+        <label for="userInput">Invite Collaborators: </label>
+        <ul class="static-form-control list-inline">
+          {{#each eligibleContacts}}
+          <li><a href="#" class="user-list" value="{{_id}}---{{name}}">{{name}}</a></li>
+          {{/each}}
+        </ul>
+      </div>
+      <div class="form-group col-md-6">
         <label for="addKeywords">Keywords: </label>
         <div class="input-group">
           <input type="text" class="form-control" id="keywordInput" placeholder="Add new keyword">
@@ -27,12 +40,11 @@
         </div>
         <ul class="static-form-control list-group">
           {{#each keywords}}
-            <li class="list-group-item">{{this}} <a class="btn btn-danger btn-xs pull-right remove-keyword" type="button"><span
-                class="glyphicon glyphicon-remove"></span></a></li>
+            <li class="list-group-item">{{this}} {{> removeRowButton item=this context="remove-keyword"}}</li>
           {{/each}}
         </ul>
       </div>
-      <div class="form-group">
+      <div class="form-group col-md-6">
         <label for="addKeywords">Needed Skills: </label>
         <div class="input-group">
           <input type="text" class="form-control" id="skillInput" placeholder="Add new skill">
@@ -42,20 +54,19 @@
         </div>
         <ul class="static-form-control list-group">
           {{#each needs}}
-            <li class="list-group-item">{{this}} <a class="btn btn-danger btn-xs pull-right remove-skill" type="button"><span
-                class="glyphicon glyphicon-remove"></span></a></li>
+            <li class="list-group-item">{{this}} {{> removeRowButton item=this context="remove-skill"}}</li>
           {{/each}}
         </ul>
       </div>
       <div class="row">
+        <a type="button" href={{pathFor 'viewProject'}} class="btn btn-primary pull-right">Done Editing</a>
         <button type="submit" class="btn btn-primary pull-right"><span class="glyphicon
             glyphicon-floppy-disk"></span> Save Changes</button>
         <a type="button" href="#" class="btn btn-danger pull-right" id="delete-project">Delete Project</a>
       </div>
-      <br/>
-      <div class="row">
-        <a type="button" href={{pathFor 'viewProject'}} class="btn btn-primary pull-right">Done Editing</a>
-      </div>
     </form>
   </div>
+{{else}}
+{{> error404}}
+{{/if}}
 </template>

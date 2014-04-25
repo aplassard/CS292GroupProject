@@ -1,5 +1,7 @@
 <template name="viewProfile">
+{{#if _id}}
 {{#if currentUser}}
+{{setTitle "PMP - Profile of " profile.name}}
   <div class="container">
     <div class="row">
       <div class="col-lg-10">
@@ -92,6 +94,9 @@
   </div>
 {{else}}
   {{> pleaseLogIn}}
+{{/if}}
+{{else}}
+  {{> error404}}
 {{/if}}
 </template>
 
